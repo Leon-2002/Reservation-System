@@ -39,14 +39,12 @@ public class LoginAdmin extends javax.swing.JFrame {
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         loginBtn = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        signUp = new javax.swing.JButton();
         clearBtn = new javax.swing.JButton();
         showPassword = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(850, 500));
+        setPreferredSize(new java.awt.Dimension(900, 500));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -153,21 +151,6 @@ public class LoginAdmin extends javax.swing.JFrame {
         });
         getContentPane().add(loginBtn);
         loginBtn.setBounds(510, 330, 111, 46);
-
-        jLabel4.setText(" Don't have an account?");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(510, 420, 146, 15);
-
-        signUp.setBackground(new java.awt.Color(102, 0, 0));
-        signUp.setForeground(new java.awt.Color(255, 204, 51));
-        signUp.setText("Sign up");
-        signUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signUpActionPerformed(evt);
-            }
-        });
-        getContentPane().add(signUp);
-        signUp.setBounds(690, 410, 80, 25);
 
         clearBtn.setBackground(new java.awt.Color(102, 0, 0));
         clearBtn.setForeground(new java.awt.Color(255, 204, 0));
@@ -302,21 +285,6 @@ public class LoginAdmin extends javax.swing.JFrame {
         txtPassword.setText("");
     }//GEN-LAST:event_clearBtnActionPerformed
 
-    private void signUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpActionPerformed
-        // TODO add your handling code here:
-            
-    JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(signUp);
-                currentFrame.setVisible(false);
-    
-    SignUpAdmin signframe = new SignUpAdmin();
-    signframe.setTitle("PUP SYSTEM");
-    signframe.setVisible(true);
-    signframe.pack();
-  
-    
-    
-    }//GEN-LAST:event_signUpActionPerformed
-
     private void showPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPasswordActionPerformed
         // TODO add your handling code here:
         if(showPassword.isSelected()){
@@ -381,7 +349,6 @@ public class LoginAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -390,7 +357,6 @@ public class LoginAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsername;
     private javax.swing.JButton loginBtn;
     private javax.swing.JCheckBox showPassword;
-    private javax.swing.JButton signUp;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

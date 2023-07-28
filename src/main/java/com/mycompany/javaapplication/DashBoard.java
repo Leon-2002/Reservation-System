@@ -558,16 +558,16 @@ public class DashBoard extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(204, 153, 0));
-        jLabel9.setText("RESERVATION LIST");
+        jLabel9.setText("My List");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(134, 134, 134)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addContainerGap(153, Short.MAX_VALUE)
                 .addComponent(jLabel9)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(135, 135, 135))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -578,7 +578,7 @@ public class DashBoard extends javax.swing.JFrame {
         );
 
         jPanel8.add(jPanel13);
-        jPanel13.setBounds(150, 30, 500, 60);
+        jPanel13.setBounds(210, 60, 370, 60);
 
         userReservationTable.setBackground(new java.awt.Color(255, 255, 255));
         userReservationTable.setForeground(new java.awt.Color(0, 0, 0));
@@ -618,7 +618,7 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
         jPanel8.add(jButton3);
-        jButton3.setBounds(290, 190, 130, 29);
+        jButton3.setBounds(340, 190, 130, 29);
 
         TabPanel.addTab("tab2", jPanel8);
 

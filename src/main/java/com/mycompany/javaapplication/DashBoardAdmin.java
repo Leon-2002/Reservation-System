@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-//import java.sql.Date;
+
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -32,6 +32,28 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     /**
      * Creates new form DashBoard 
      */
+    
+    
+   public String UserFirstName; 
+   public String UserLastName;
+    // Getter
+  public String getName() {
+    return UserFirstName;
+  }
+
+  // Setter
+  public void setName(String newName) {
+    this.UserFirstName = newName;
+  }
+  
+  public String getLname() {
+    return UserLastName;
+  }
+
+  // Setter
+  public void setLastname(String newName) {
+    this.UserLastName = newName;
+  }
 
     public DashBoardAdmin(String fname, String lname) {
         initComponents();
@@ -152,6 +174,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel5 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         lblUsername = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -209,12 +232,11 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         userTable = new javax.swing.JTable();
         passwordField = new javax.swing.JTextField();
-        fullNameField = new javax.swing.JTextField();
+        firstNameField = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         userNameField = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        roleField = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -222,6 +244,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         lastNameField = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
+        cbxRole = new javax.swing.JComboBox<>();
         jPanel12 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
@@ -229,6 +252,8 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         expirationTable = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
         deleteBtn1 = new javax.swing.JButton();
+        searchField1 = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         showReservationBtn = new javax.swing.JButton();
         reservatiobBtn = new javax.swing.JButton();
@@ -247,6 +272,8 @@ public class DashBoardAdmin extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 1000));
@@ -293,7 +320,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 1220, 40);
+        jPanel1.setBounds(0, 0, 1220, 30);
 
         jPanel2.setBackground(new java.awt.Color(102, 0, 0));
         jPanel2.setLayout(null);
@@ -383,6 +410,11 @@ public class DashBoardAdmin extends javax.swing.JFrame {
 
         nameTxt.setBackground(new java.awt.Color(255, 255, 255));
         nameTxt.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        nameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nameTxtKeyTyped(evt);
+            }
+        });
         personTxt.add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 140, -1));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -644,6 +676,11 @@ public class DashBoardAdmin extends javax.swing.JFrame {
 
         SurnameTxt.setBackground(new java.awt.Color(255, 255, 255));
         SurnameTxt.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        SurnameTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SurnameTxtKeyTyped(evt);
+            }
+        });
         personTxt1.add(SurnameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 140, -1));
 
         contactTxt.setBackground(new java.awt.Color(255, 255, 255));
@@ -762,6 +799,9 @@ public class DashBoardAdmin extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userTableMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                userTableMouseEntered(evt);
+            }
         });
         jScrollPane1.setViewportView(userTable);
         if (userTable.getColumnModel().getColumnCount() > 0) {
@@ -779,9 +819,14 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jPanel8.add(passwordField);
         passwordField.setBounds(210, 230, 150, 30);
 
-        fullNameField.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel8.add(fullNameField);
-        fullNameField.setBounds(210, 160, 150, 30);
+        firstNameField.setBackground(new java.awt.Color(255, 255, 255));
+        firstNameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                firstNameFieldKeyTyped(evt);
+            }
+        });
+        jPanel8.add(firstNameField);
+        firstNameField.setBounds(210, 160, 150, 30);
 
         jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(102, 0, 0));
@@ -804,10 +849,6 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jLabel24.setText("search");
         jPanel8.add(jLabel24);
         jLabel24.setBounds(610, 200, 90, 30);
-
-        roleField.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel8.add(roleField);
-        roleField.setBounds(420, 230, 150, 30);
 
         jLabel25.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(102, 0, 0));
@@ -884,6 +925,11 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jButton5.setBounds(60, 310, 120, 29);
 
         lastNameField.setBackground(new java.awt.Color(255, 255, 255));
+        lastNameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                lastNameFieldKeyTyped(evt);
+            }
+        });
         jPanel8.add(lastNameField);
         lastNameField.setBounds(420, 160, 150, 30);
 
@@ -892,6 +938,12 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jLabel26.setText("First name");
         jPanel8.add(jLabel26);
         jLabel26.setBounds(210, 130, 80, 20);
+
+        cbxRole.setBackground(new java.awt.Color(255, 255, 255));
+        cbxRole.setForeground(new java.awt.Color(51, 51, 51));
+        cbxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "student" }));
+        jPanel8.add(cbxRole);
+        cbxRole.setBounds(410, 230, 160, 30);
 
         TabPanel.addTab("tab2", jPanel8);
 
@@ -984,6 +1036,18 @@ public class DashBoardAdmin extends javax.swing.JFrame {
             }
         });
 
+        searchField1.setBackground(new java.awt.Color(255, 255, 255));
+        searchField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchField1KeyReleased(evt);
+            }
+        });
+
+        jLabel28.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel28.setIcon(new javax.swing.ImageIcon("C:\\Users\\loena\\Downloads\\search1.png")); // NOI18N
+        jLabel28.setText("Search");
+
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
@@ -991,28 +1055,37 @@ public class DashBoardAdmin extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addGap(20, 20, 20)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel12Layout.createSequentialGroup()
-                            .addGap(37, 37, 37)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(162, 162, 162)
-                            .addComponent(deleteBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel12Layout.createSequentialGroup()
-                            .addGap(163, 163, 163)
-                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(203, Short.MAX_VALUE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(177, 177, 177)
+                        .addComponent(deleteBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(144, 144, 144)
+                        .addComponent(searchField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(165, 205, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(236, 236, 236))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(46, 46, 46)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(141, 141, 141)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(95, 95, 95)
+                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(137, Short.MAX_VALUE))
@@ -1021,7 +1094,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         TabPanel.addTab("tab3", jPanel12);
 
         getContentPane().add(TabPanel);
-        TabPanel.setBounds(190, 30, 980, 820);
+        TabPanel.setBounds(190, 40, 980, 820);
 
         jPanel3.setBackground(new java.awt.Color(102, 0, 0));
         jPanel3.setLayout(null);
@@ -1438,30 +1511,79 @@ public class DashBoardAdmin extends javax.swing.JFrame {
             
             String id = idField.getText().toLowerCase();
             int user_id = Integer.parseInt(id);
-            String firstname = fullNameField.getText().toLowerCase();
+            String firstname = firstNameField.getText().toLowerCase();
             String lastname = lastNameField.getText().toLowerCase();
             String username = userNameField.getText().toLowerCase();
             String password = passwordField.getText().toLowerCase();
-            String role = roleField.getText().toLowerCase();
+            //String role = roleField.getText().toLowerCase();
+           String role = (String) cbxRole.getSelectedItem();
            
-           //UserUpdate.UpdateUser(user_id, fullname, username, password, role);
            
            String updateQuery = "update users1 set firstname='"+firstname+"', lastname='"+lastname+"',username='"+username+"', password='"+password+"', role='"+role+"' where user_id = '"+user_id+"'";
            PreparedStatement insertStmt = conn.prepareStatement(updateQuery);
            insertStmt.executeUpdate();
            
+         
+           
+            String updateName = "UPDATE reservation SET name=?, surname=? WHERE name=? AND surname=?";
+             PreparedStatement insertStmt1 = conn.prepareStatement(updateName);
+                insertStmt1.setString(1, firstname);
+                insertStmt1.setString(2, lastname);
+                insertStmt1.setString(3,  UserFirstName);
+                insertStmt1.setString(4, UserLastName);
+               
+                insertStmt1.executeUpdate();
+                
+                
+                
+           
+           
            
            JOptionPane.showMessageDialog(null, "user updated");
             idField.setText("");
-            fullNameField.setText("");
+            firstNameField.setText("");
+            lastNameField.setText("");
             userNameField.setText("");
             passwordField.setText("");
-            roleField.setText("");
+            //roleField.setText("");
             
 
             
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
+        }
+        // clear the table before add
+        DefaultTableModel model1 = (DefaultTableModel) reservationTable.getModel();
+        model1.setRowCount(0);
+
+        // to update the table
+        try (Connection conn = DatabaseConnector.getConnection()) {
+            String query = "SELECT * FROM reservation order by return_date";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                // User exists with the provided username and password
+                String id = String.valueOf(rs.getInt("reservation_id"));
+                String name = rs.getString("name");
+                String surname = rs.getString("surname");
+                long contact = rs.getLong("contacts");
+                String contacts = String.valueOf(contact);
+                String date = String.valueOf(rs.getDate("return_date"));
+                String equipment = rs.getString("equipment");
+                String quantity = String.valueOf(rs.getInt("quantity"));
+
+                //String array for store data into jtable
+                String tbData[] = {id,name,surname,contacts,date,equipment,quantity};
+
+                DefaultTableModel tblModel = (DefaultTableModel) reservationTable.getModel();
+
+                //add Strinf array dara into table
+                tblModel.addRow(tbData);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         
      // clear the table before add
@@ -1508,7 +1630,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         String fname = userTable.getModel().getValueAt(row, 1).toString();
         String lname = userTable.getModel().getValueAt(row, 2).toString();
        
-         String checkRole = roleField.getText();
+         String checkRole = (String) cbxRole.getSelectedItem();
             if(checkRole.equals("admin")){
                 JOptionPane.showMessageDialog(null, "Admin cannot be deleted");
             }
@@ -1525,10 +1647,10 @@ public class DashBoardAdmin extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "DELETED SUCCESSFULLY");
             idField.setText("");
-            fullNameField.setText("");
+            firstNameField.setText("");
             userNameField.setText("");
             passwordField.setText("");
-            roleField.setText("");
+            
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -1573,11 +1695,12 @@ public class DashBoardAdmin extends javax.swing.JFrame {
 
     private void CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateActionPerformed
         // TODO add your handling code here:
-        String fname = fullNameField.getText().toLowerCase();
+        String fname = firstNameField.getText().toLowerCase();
             String lname = lastNameField.getText().toLowerCase();
             String username1 = userNameField.getText().toLowerCase();
             String password1 = passwordField.getText().toLowerCase();
-            String role1 = roleField.getText();
+            //String role1 = roleField.getText();
+            String role1 = (String) cbxRole.getSelectedItem();
             
          
             // method that will check if the user is already exist in the data base
@@ -1594,11 +1717,11 @@ public class DashBoardAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "user created");
 
             idField.setText("");
-            fullNameField.setText("");
+            firstNameField.setText("");
             lastNameField.setText("");
             userNameField.setText("");
             passwordField.setText("");
-            roleField.setText("");
+           
             idField.setText("");
             
 
@@ -1643,15 +1766,35 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         int i = userTable.getSelectedRow();
         TableModel model = userTable.getModel();
-
+        
+        
+        
+        
         idField.setText(model.getValueAt(i,0).toString());
-        fullNameField.setText(model.getValueAt(i,1).toString());
+        firstNameField.setText(model.getValueAt(i,1).toString());
         lastNameField.setText(model.getValueAt(i,2).toString());
         userNameField.setText(model.getValueAt(i,3).toString());
         passwordField.setText(model.getValueAt(i,4).toString());
-         roleField.setText(model.getValueAt(i,5).toString());
+        // roleField.setText(model.getValueAt(i,5).toString());
+         String role = model.getValueAt(i, 5).toString();
+         
+        String changeFname =  firstNameField.getText();
+        String changeLname =   lastNameField.getText();
+        setName(changeFname);
+        setLastname(changeLname);
+         
         
-      
+        
+        for(int j = 0; j < cbxRole.getItemCount(); j++){
+            if(cbxRole.getItemAt(j).equalsIgnoreCase(role)){
+                cbxRole.setSelectedIndex(j);
+            }
+        }
+        
+
+        
+        
+        
 
     }//GEN-LAST:event_userTableMouseClicked
 
@@ -1678,11 +1821,10 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         idField.setText("");
-            fullNameField.setText("");
+            firstNameField.setText("");
             lastNameField.setText("");
             userNameField.setText("");
             passwordField.setText("");
-            roleField.setText("");
             
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -1823,6 +1965,47 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         // TODO add your handling code here: 
     }//GEN-LAST:event_jPanel8MouseClicked
 
+    private void userTableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTableMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userTableMouseEntered
+
+    private void searchField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchField1KeyReleased
+        // TODO add your handling code here:
+        DefaultTableModel table = (DefaultTableModel)expirationTable.getModel();
+        String search = searchField1.getText().toLowerCase();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+        expirationTable.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(search));
+    }//GEN-LAST:event_searchField1KeyReleased
+
+    private void nameTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTxtKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isAlphabetic(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_nameTxtKeyTyped
+
+    private void SurnameTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SurnameTxtKeyTyped
+        // TODO add your handling code here:
+         if (!Character.isAlphabetic(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_SurnameTxtKeyTyped
+
+    private void firstNameFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstNameFieldKeyTyped
+        // TODO add your handling code here:
+         if (!Character.isAlphabetic(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_firstNameFieldKeyTyped
+
+    private void lastNameFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastNameFieldKeyTyped
+        // TODO add your handling code here:
+         if (!Character.isAlphabetic(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_lastNameFieldKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -1865,6 +2048,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField SurnameTxt2;
     private javax.swing.JTabbedPane TabPanel;
     private javax.swing.JComboBox<String> cbxEquipment;
+    private javax.swing.JComboBox<String> cbxRole;
     private javax.swing.JTextField contactTxt;
     private javax.swing.JTextField contactTxt2;
     private com.toedter.calendar.JDateChooser dateTxt;
@@ -1872,7 +2056,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private javax.swing.JButton deleteBtn;
     private javax.swing.JButton deleteBtn1;
     private javax.swing.JTable expirationTable;
-    private javax.swing.JTextField fullNameField;
+    private javax.swing.JTextField firstNameField;
     private javax.swing.JTextField idField;
     private javax.swing.JTextField idTxt;
     private javax.swing.JButton jButton1;
@@ -1902,6 +2086,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1926,6 +2111,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField lastNameField;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JButton logOutBtn;
@@ -1937,8 +2123,8 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private javax.swing.JSpinner quantitySpinner;
     private javax.swing.JButton reservatiobBtn;
     private javax.swing.JTable reservationTable;
-    private javax.swing.JTextField roleField;
     private javax.swing.JTextField searchField;
+    private javax.swing.JTextField searchField1;
     private javax.swing.JTextField searchTxt;
     private javax.swing.JButton showReservationBtn;
     private javax.swing.JButton showReservationBtn1;
@@ -1947,10 +2133,6 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 
-    private static class dateTxt {
-
-        public dateTxt() {
-        }
-    }
+   
     
 }

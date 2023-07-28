@@ -113,6 +113,11 @@ public class SignUp extends javax.swing.JFrame {
                 txtFullnameActionPerformed(evt);
             }
         });
+        txtFullname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFullnameKeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\loena\\Downloads\\key.png")); // NOI18N
@@ -168,6 +173,11 @@ public class SignUp extends javax.swing.JFrame {
                 txtUsernameActionPerformed(evt);
             }
         });
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyTyped(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\loena\\Downloads\\user.png")); // NOI18N
@@ -176,6 +186,11 @@ public class SignUp extends javax.swing.JFrame {
         txtSurname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSurnameActionPerformed(evt);
+            }
+        });
+        txtSurname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSurnameKeyTyped(evt);
             }
         });
 
@@ -376,6 +391,25 @@ public class SignUp extends javax.swing.JFrame {
         p.setVisible(true);
 
     }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void txtFullnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFullnameKeyTyped
+        // TODO add your handling code here:
+         if (!Character.isAlphabetic(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFullnameKeyTyped
+
+    private void txtSurnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSurnameKeyTyped
+        // TODO add your handling code here:
+         if (!Character.isAlphabetic(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtSurnameKeyTyped
+
+    private void txtUsernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyTyped
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_txtUsernameKeyTyped
 
     /**
      * @param args the command line arguments
