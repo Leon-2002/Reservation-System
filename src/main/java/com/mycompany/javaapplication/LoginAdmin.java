@@ -44,7 +44,7 @@ public class LoginAdmin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 500));
+        setPreferredSize(new java.awt.Dimension(850, 500));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -60,7 +60,7 @@ public class LoginAdmin extends javax.swing.JFrame {
         jLabel6.setBackground(new java.awt.Color(153, 0, 0));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel6.setText("POLYTHECNIC UNIVERSITY OF THE PHILIPPINES");
+        jLabel6.setText("POLYTECHNIC UNIVERSITY OF THE PHILIPPINES");
 
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\loena\\OneDrive\\Pictures\\Screenshots\\300px-logo.png")); // NOI18N
 
@@ -230,8 +230,12 @@ public class LoginAdmin extends javax.swing.JFrame {
                       if(counter==3){
                     try{
                         //JOptionPane.showMessageDialog(null,"3 invalid input. \n1 minute break");
-                        Break b = new Break();
-                        b.setVisible(true);
+                        dispose();
+                        
+                        Break admin = new Break();
+                        admin.setVisible(true);
+                        
+                         
                         
                         //program will stop for a minute
                         //Thread.sleep(60000);
@@ -257,7 +261,8 @@ public class LoginAdmin extends javax.swing.JFrame {
                 if(counter==3){
                     try{
                         //JOptionPane.showMessageDialog(null,"3 invalid input. \n1 minute break");
-                        Break b = new Break();
+                        dispose();
+                        BreakAdmin b = new BreakAdmin();
                         b.setVisible(true);
                         
                         //program will stop for a minute

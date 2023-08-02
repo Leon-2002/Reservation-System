@@ -33,7 +33,7 @@ public class Portal extends javax.swing.JFrame {
         studentBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 400));
+        setPreferredSize(new java.awt.Dimension(471, 400));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -41,23 +41,23 @@ public class Portal extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 153, 0));
-        jLabel1.setText("PUP PORTAL");
+        jLabel1.setText("PUP Reservation System");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(172, 172, 172)
+                .addGap(99, 99, 99)
                 .addComponent(jLabel1)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(25, 25, 25))
+                .addGap(26, 26, 26))
         );
 
         getContentPane().add(jPanel1);
@@ -78,7 +78,7 @@ public class Portal extends javax.swing.JFrame {
         studentBtn.setBackground(new java.awt.Color(102, 0, 0));
         studentBtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         studentBtn.setForeground(new java.awt.Color(204, 153, 0));
-        studentBtn.setText("STUDENT");
+        studentBtn.setText("USER");
         studentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 studentBtnActionPerformed(evt);
@@ -115,7 +115,7 @@ public class Portal extends javax.swing.JFrame {
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 90, 500, 310);
 
-        pack();
+        setSize(new java.awt.Dimension(483, 420));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

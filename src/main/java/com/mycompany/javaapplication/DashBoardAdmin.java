@@ -5,6 +5,7 @@
 package com.mycompany.javaapplication;
 
 
+import static com.mycompany.javaapplication.DashBoard.isValidNumber;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,8 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -190,7 +193,6 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        dateTxt = new com.toedter.calendar.JDateChooser();
         nameTxt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         personTxt1 = new javax.swing.JPanel();
@@ -205,7 +207,6 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
-        dateTxt1 = new com.toedter.calendar.JDateChooser();
         nameTxt2 = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         cbxEquipment = new javax.swing.JComboBox<>();
@@ -220,6 +221,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         SurnameTxt = new javax.swing.JTextField();
         contactTxt = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
+        dateTxt = new com.toedter.calendar.JDateChooser();
         SurnameTxt2 = new javax.swing.JTextField();
         contactTxt2 = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
@@ -276,7 +278,6 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 1000));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -288,7 +289,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jLabel7.setBackground(new java.awt.Color(204, 153, 0));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel7.setText("POLYTHECNIC UNIVERSITY OF THE PHILIPPINES");
+        jLabel7.setText("POLYTECHNIC UNIVERSITY OF THE PHILIPPINES");
 
         jLabel19.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(102, 0, 0));
@@ -320,7 +321,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 1220, 30);
+        jPanel1.setBounds(-10, 0, 1220, 70);
 
         jPanel2.setBackground(new java.awt.Color(102, 0, 0));
         jPanel2.setLayout(null);
@@ -401,12 +402,6 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(102, 0, 0));
         jLabel14.setText("Name");
         personTxt.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 87, 25));
-
-        dateTxt.setBackground(new java.awt.Color(255, 255, 255));
-        dateTxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        dateTxt.setForeground(new java.awt.Color(0, 0, 0));
-        dateTxt.setDateFormatString("y -MMM-d");
-        personTxt.add(dateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 150, 20));
 
         nameTxt.setBackground(new java.awt.Color(255, 255, 255));
         nameTxt.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -532,18 +527,12 @@ public class DashBoardAdmin extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        personTxt1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 130, 40));
+        personTxt1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 130, 40));
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(102, 0, 0));
         jLabel17.setText("Name");
         personTxt1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 87, 25));
-
-        dateTxt1.setBackground(new java.awt.Color(255, 255, 255));
-        dateTxt1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        dateTxt1.setForeground(new java.awt.Color(0, 0, 0));
-        dateTxt1.setDateFormatString("y -MMM-d");
-        personTxt1.add(dateTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 150, 20));
 
         nameTxt2.setBackground(new java.awt.Color(255, 255, 255));
         nameTxt2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -579,9 +568,10 @@ public class DashBoardAdmin extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        personTxt1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 120, 40));
+        personTxt1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 120, 40));
 
         reservationTable.setBackground(new java.awt.Color(255, 255, 255));
+        reservationTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         reservationTable.setForeground(new java.awt.Color(0, 0, 0));
         reservationTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -591,14 +581,22 @@ public class DashBoardAdmin extends javax.swing.JFrame {
                 "Id", "Name", "Surname", "Contacts", "Return Date", "Equipments", "Quantity"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        reservationTable.setRowHeight(30);
         reservationTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 reservationTableMouseClicked(evt);
@@ -615,7 +613,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
             reservationTable.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        personTxt1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 750, 310));
+        personTxt1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 750, 310));
 
         deleteBtn.setBackground(new java.awt.Color(102, 0, 0));
         deleteBtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -631,7 +629,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
                 deleteBtnActionPerformed(evt);
             }
         });
-        personTxt1.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 340, 120, 40));
+        personTxt1.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 320, 120, 40));
 
         jButton6.setBackground(new java.awt.Color(102, 0, 0));
         jButton6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -647,7 +645,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        personTxt1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, 120, 40));
+        personTxt1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, 120, 40));
 
         quantitySpinner.setValue(1);
         quantitySpinner.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -696,6 +694,12 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(102, 0, 0));
         jLabel21.setText("ID");
         personTxt1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 20, 20));
+
+        dateTxt.setBackground(new java.awt.Color(255, 255, 255));
+        dateTxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        dateTxt.setForeground(new java.awt.Color(0, 0, 0));
+        dateTxt.setDateFormatString("y -MMM-d");
+        personTxt1.add(dateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 140, 30));
 
         personTxt.add(personTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 700));
 
@@ -779,6 +783,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         jPanel8.add(idField);
         idField.setBounds(90, 160, 80, 30);
 
+        userTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -795,6 +800,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        userTable.setRowHeight(30);
         userTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userTableMouseClicked(evt);
@@ -973,6 +979,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         );
 
         expirationTable.setBackground(new java.awt.Color(255, 255, 255));
+        expirationTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         expirationTable.setForeground(new java.awt.Color(0, 0, 0));
         expirationTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -990,6 +997,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        expirationTable.setRowHeight(30);
         expirationTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 expirationTableMouseClicked(evt);
@@ -1168,7 +1176,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         getContentPane().add(jPanel3);
         jPanel3.setBounds(0, 60, 190, 800);
 
-        pack();
+        setSize(new java.awt.Dimension(982, 790));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1189,6 +1197,8 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private void logOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutBtnActionPerformed
         // TODO add your handling code here:
         dispose();
+        Portal p = new Portal();
+        p.setVisible(true);
     }//GEN-LAST:event_logOutBtnActionPerformed
 
     private void contactTxt2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactTxt2KeyTyped
@@ -1223,12 +1233,37 @@ public class DashBoardAdmin extends javax.swing.JFrame {
             java.sql.Date sqlDate = new java.sql.Date(return_date.getTime());
             int quantity = (int) quantitySpinner.getValue();
             
+             // contact number validator
+             Boolean contactValidator =isValidNumber(contacts);
+            
+             if(nameTxt.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "First name is empty.");
+            }
+             if(SurnameTxt.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Last name is empty.");
+            }
             if(contactTxt.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Contacts cannot be empty.");
             }
              if(cbxEquipment.getSelectedItem().equals("Select item")){
                 JOptionPane.showMessageDialog(null, "Please Select an item");
                 return;
+            }
+             if (!name.matches("^[a-zA-Z\\s]+$")) {
+                JOptionPane.showMessageDialog(null, "Firstname Must Not Have A Number Or Special Characters");
+                return;
+            }
+            if (!surname.matches("^[a-zA-Z\\s]+$")) {
+                JOptionPane.showMessageDialog(null, "Lastname Must Not Have A Number Or Special Characters");
+                return;
+            }
+            if(contactValidator){
+                JOptionPane.showMessageDialog(null, "Contact Starts with 09");
+                return;
+            }
+            if(contacts.length()!= 11){
+                 JOptionPane.showMessageDialog(null, "Contact must be 11 digits");
+                 return;
             }
             else{
                 UserHandler.updateReservation(id,name,surname,contacts, sqlDate ,equipments,quantity);
@@ -1385,6 +1420,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
         try{
             String name = nameTxt.getText().toLowerCase();
             String surname = SurnameTxt.getText().toLowerCase();
@@ -1394,10 +1430,12 @@ public class DashBoardAdmin extends javax.swing.JFrame {
             java.util.Date return_date = dateTxt.getDate();
             java.sql.Date sqlDate = new java.sql.Date(return_date.getTime());
             
-           
-
             int quantity= (int) quantitySpinner.getValue();
             
+            // contact number validator
+             Boolean contactValidator =isValidNumber(contacts);
+             
+             // reservation validation
              boolean isValid = UserHandler.reservationValid(name,surname, contacts, sqlDate,equipments,quantity);
             
             if(isValid){
@@ -1412,6 +1450,22 @@ public class DashBoardAdmin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please Select an item");
                 return;
             }
+            if (!name.matches("^[a-zA-Z\\s]+$")) {
+                JOptionPane.showMessageDialog(null, "Firstname Must Not Have A Number Or Special Characters");
+                return;
+            }
+            if (!surname.matches("^[a-zA-Z\\s]+$")) {
+                JOptionPane.showMessageDialog(null, "Lastname Must Not Have A Number Or Special Characters");
+                return;
+            }
+            if(contactValidator){
+                JOptionPane.showMessageDialog(null, "Contact Starts with 09");
+                return;
+            }
+             if(contacts.length()!= 11){
+                 JOptionPane.showMessageDialog(null, "Contact must be 11 digits");
+                 return;
+            }
             else{
             UserHandler.reservation(name,surname,contacts, sqlDate ,equipments,quantity);
             JOptionPane.showMessageDialog(null, "Reservation created");
@@ -1425,7 +1479,7 @@ public class DashBoardAdmin extends javax.swing.JFrame {
             quantitySpinner.setValue(1);
 
         } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Complete your input");
+            JOptionPane.showMessageDialog(null, "Date is empty");
         }
 
         // clear the table before add
@@ -1683,6 +1737,41 @@ public class DashBoardAdmin extends javax.swing.JFrame {
 
                 //add Strinf array dara into table
                 tblModel.addRow(tbData);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        //for reservation table
+          // clear the table before add
+        DefaultTableModel model1 = (DefaultTableModel) reservationTable.getModel();
+        model1.setRowCount(0);
+
+        // to update the table
+        try (Connection conn = DatabaseConnector.getConnection()) {
+            String query = "SELECT * FROM reservation order by return_date";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                // User exists with the provided username and password
+                String id = String.valueOf(rs.getInt("reservation_id"));
+                String name = rs.getString("name");
+                String surname = rs.getString("surname");
+                long contact = rs.getLong("contacts");
+                String contacts = String.valueOf(contact);
+                String date = String.valueOf(rs.getDate("return_date"));
+                String equipment = rs.getString("equipment");
+                String quantity = String.valueOf(rs.getInt("quantity"));
+
+                //String array for store data into jtable
+                String tbData[] = {id,name,surname,contacts,date,equipment,quantity};
+
+                DefaultTableModel tblModel = (DefaultTableModel) reservationTable.getModel();
+
+                //add Strinf array dara into table
+                tblModel.addRow(tbData);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1980,16 +2069,10 @@ public class DashBoardAdmin extends javax.swing.JFrame {
 
     private void nameTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTxtKeyTyped
         // TODO add your handling code here:
-        if (!Character.isAlphabetic(evt.getKeyChar())){
-            evt.consume();
-        }
     }//GEN-LAST:event_nameTxtKeyTyped
 
     private void SurnameTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SurnameTxtKeyTyped
         // TODO add your handling code here:
-         if (!Character.isAlphabetic(evt.getKeyChar())){
-            evt.consume();
-        }
     }//GEN-LAST:event_SurnameTxtKeyTyped
 
     private void firstNameFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstNameFieldKeyTyped
@@ -2042,6 +2125,15 @@ public class DashBoardAdmin extends javax.swing.JFrame {
         });
     }
 
+    public static boolean containsOnlyAlphabets(String input) {
+        for (char c : input.toCharArray()) {
+            if (!Character.isLetter(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Create;
     private javax.swing.JTextField SurnameTxt;
@@ -2052,7 +2144,6 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField contactTxt;
     private javax.swing.JTextField contactTxt2;
     private com.toedter.calendar.JDateChooser dateTxt;
-    private com.toedter.calendar.JDateChooser dateTxt1;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JButton deleteBtn1;
     private javax.swing.JTable expirationTable;
@@ -2133,6 +2224,28 @@ public class DashBoardAdmin extends javax.swing.JFrame {
     private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 
-   
+// public static boolean isValidNumber(String number) {
+//        // Define the regular expression pattern
+//        String pattern = "^09\\d{9}$";
+//
+//        // Compile the pattern into a regex object
+//        Pattern regex = Pattern.compile(pattern);
+//
+//        // Match the input number against the pattern
+//        Matcher matcher = regex.matcher(number);
+//
+//        // Check if the number matches the pattern
+//        return matcher.matches();
+//    }
     
+ public static boolean isValidNumber(String number) {
+        if (number.length() == 2) {
+            return false;
+        }
+
+        char digitAtIndex0 = number.charAt(0);
+        char digitAtIndex1 = number.charAt(1);
+
+        return digitAtIndex0 != '0' && digitAtIndex1 != '9';
+    }
 }

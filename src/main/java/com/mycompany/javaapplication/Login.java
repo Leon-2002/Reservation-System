@@ -56,7 +56,7 @@ public class Login extends javax.swing.JFrame {
         jLabel6.setBackground(new java.awt.Color(153, 0, 0));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel6.setText("POLYTHECNIC UNIVERSITY OF THE PHILIPPINES");
+        jLabel6.setText("POLYTECHNIC UNIVERSITY OF THE PHILIPPINES");
 
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\loena\\OneDrive\\Pictures\\Screenshots\\300px-logo.png")); // NOI18N
 
@@ -305,6 +305,7 @@ public class Login extends javax.swing.JFrame {
                 if(counter==3){
                     try{
                         //JOptionPane.showMessageDialog(null,"3 invalid input. \n1 minute break");
+                        dispose();
                         Break b = new Break();
                         b.setVisible(true);
                         

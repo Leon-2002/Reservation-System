@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
  import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  *
@@ -68,35 +70,35 @@ public class DashBoard extends javax.swing.JFrame {
        
        
         // to add data to table
-       try (Connection conn = DatabaseConnector.getConnection()) {
-            String query = "SELECT * FROM reservation";
-            PreparedStatement pstmt = conn.prepareStatement(query);              
-            ResultSet rs = pstmt.executeQuery();
-              
-
-            while (rs.next()) {
-                // User exists with the provided username and password
-                 String id = String.valueOf(rs.getInt("reservation_id"));
-                String name = rs.getString("name");
-                String surname = rs.getString("surname");
-                long contact = rs.getLong("contacts");
-                String contacts = String.valueOf(contact);
-                String dates = String.valueOf(rs.getDate("return_date"));
-                String equipment = rs.getString("equipment");
-                String quantity = String.valueOf(rs.getInt("quantity"));
-                
-                //String array for store data into jtable
-                String tbData[] = {id,name,surname,contacts,dates,equipment,quantity};
-                
-                DefaultTableModel tblModel = (DefaultTableModel) reservationTable.getModel();
-                
-                //add Strinf array dara into table
-                tblModel.addRow(tbData);
-                
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//       try (Connection conn = DatabaseConnector.getConnection()) {
+//            String query = "SELECT * FROM reservation";
+//            PreparedStatement pstmt = conn.prepareStatement(query);              
+//            ResultSet rs = pstmt.executeQuery();
+//              
+//
+//            while (rs.next()) {
+//                // User exists with the provided username and password
+//                 String id = String.valueOf(rs.getInt("reservation_id"));
+//                String name = rs.getString("name");
+//                String surname = rs.getString("surname");
+//                long contact = rs.getLong("contacts");
+//                String contacts = String.valueOf(contact);
+//                String dates = String.valueOf(rs.getDate("return_date"));
+//                String equipment = rs.getString("equipment");
+//                String quantity = String.valueOf(rs.getInt("quantity"));
+//                
+//                //String array for store data into jtable
+//                String tbData[] = {id,name,surname,contacts,dates,equipment,quantity};
+//                
+//                DefaultTableModel tblModel = (DefaultTableModel) userReservationTable.getModel();
+//                
+//                //add Strinf array dara into table
+//                tblModel.addRow(tbData);
+//                
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
        
        
          // to add data to table
@@ -123,7 +125,7 @@ public class DashBoard extends javax.swing.JFrame {
                 //String array for store data into jtable
                 String tbData[] = {id,name,surname,contacts,dates,equipment,quantity};
                 
-                DefaultTableModel tblModel = (DefaultTableModel) userReservationTable.getModel();
+                DefaultTableModel tblModel = (DefaultTableModel) userReservationTable1.getModel();
                 
                 //add Strinf array dara into table
                 tblModel.addRow(tbData);
@@ -150,46 +152,32 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         TabPanel = new javax.swing.JTabbedPane();
         personTxt = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        SurnameTxt = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        contactTxt = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        dateTxt = new com.toedter.calendar.JDateChooser();
-        nameTxt = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         personTxt1 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        SurnameTxt1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        contactTxt1 = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
-        dateTxt1 = new com.toedter.calendar.JDateChooser();
-        nameTxt2 = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
         cbxEquipment = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        reservationTable = new javax.swing.JTable();
         quantitySpinner = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        nameTxt = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        SurnameTxt = new javax.swing.JTextField();
+        contactTxt = new javax.swing.JTextField();
+        dateTxt = new com.toedter.calendar.JDateChooser();
         jPanel8 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        userReservationTable = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        userReservationTable1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         showReservationBtn = new javax.swing.JButton();
         reservatiobBtn = new javax.swing.JButton();
@@ -209,7 +197,6 @@ public class DashBoard extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 1000));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -257,66 +244,6 @@ public class DashBoard extends javax.swing.JFrame {
         personTxt.setBackground(new java.awt.Color(255, 255, 255));
         personTxt.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel3.setText("Contact number");
-        personTxt.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 140, 25));
-
-        SurnameTxt.setBackground(new java.awt.Color(255, 255, 255));
-        SurnameTxt.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        SurnameTxt.setEnabled(false);
-        personTxt.add(SurnameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 140, -1));
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel4.setText("Surname");
-        personTxt.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 87, -1));
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel5.setText("Date of Return");
-        personTxt.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 110, 25));
-
-        contactTxt.setBackground(new java.awt.Color(255, 255, 255));
-        contactTxt.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        contactTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contactTxtActionPerformed(evt);
-            }
-        });
-        contactTxt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                contactTxtKeyTyped(evt);
-            }
-        });
-        personTxt.add(contactTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 140, -1));
-
-        jPanel4.setBackground(new java.awt.Color(102, 0, 0));
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 153, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("RESERVATION SYSTEM");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
-        );
-
-        personTxt.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 590, 60));
-
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -343,53 +270,23 @@ public class DashBoard extends javax.swing.JFrame {
 
         personTxt.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel14.setText("Name");
-        personTxt.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 87, 25));
-
-        dateTxt.setBackground(new java.awt.Color(255, 255, 255));
-        dateTxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        dateTxt.setForeground(new java.awt.Color(0, 0, 0));
-        dateTxt.setDateFormatString("y -MMM-d");
-        personTxt.add(dateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 150, 20));
-
-        nameTxt.setBackground(new java.awt.Color(255, 255, 255));
-        nameTxt.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        nameTxt.setEnabled(false);
-        personTxt.add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 140, -1));
-
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Equipments");
-        personTxt.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 100, 30));
-
         personTxt1.setBackground(new java.awt.Color(255, 255, 255));
         personTxt1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 0, 0));
         jLabel10.setText("Contact number");
-        personTxt1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 140, 25));
-
-        SurnameTxt1.setBackground(new java.awt.Color(255, 255, 255));
-        SurnameTxt1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        personTxt1.add(SurnameTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 140, -1));
+        personTxt1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 140, 25));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 0, 0));
         jLabel11.setText("Surname");
-        personTxt1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 87, -1));
+        personTxt1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 87, -1));
 
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 0, 0));
         jLabel15.setText("Date of Return");
-        personTxt1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 110, 25));
-
-        contactTxt1.setBackground(new java.awt.Color(255, 255, 255));
-        contactTxt1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        personTxt1.add(contactTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 140, -1));
+        personTxt1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, 110, 25));
 
         jPanel6.setBackground(new java.awt.Color(102, 0, 0));
 
@@ -457,28 +354,7 @@ public class DashBoard extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        personTxt1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, 120, 40));
-
-        jLabel17.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel17.setText("Name");
-        personTxt1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 87, 25));
-
-        dateTxt1.setBackground(new java.awt.Color(255, 255, 255));
-        dateTxt1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        dateTxt1.setForeground(new java.awt.Color(0, 0, 0));
-        dateTxt1.setDateFormatString("y -MMM-d");
-        personTxt1.add(dateTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 150, 20));
-
-        nameTxt2.setBackground(new java.awt.Color(255, 255, 255));
-        nameTxt2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        personTxt1.add(nameTxt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 140, -1));
-
-        jLabel18.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("Equipments");
-        personTxt1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 100, 30));
+        personTxt1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 610, 120, 40));
 
         cbxEquipment.setBackground(new java.awt.Color(255, 255, 255));
         cbxEquipment.setForeground(new java.awt.Color(0, 0, 0));
@@ -488,7 +364,7 @@ public class DashBoard extends javax.swing.JFrame {
                 cbxEquipmentActionPerformed(evt);
             }
         });
-        personTxt1.add(cbxEquipment, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 130, 30));
+        personTxt1.add(cbxEquipment, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 130, 30));
 
         jButton1.setBackground(new java.awt.Color(102, 0, 0));
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -504,29 +380,7 @@ public class DashBoard extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        personTxt1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 300, 120, 40));
-
-        reservationTable.setBackground(new java.awt.Color(255, 255, 255));
-        reservationTable.setForeground(new java.awt.Color(0, 0, 0));
-        reservationTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id", "Name", "Surname", "Contacts", "Return Date", "Equipments", "Quantity"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(reservationTable);
-
-        personTxt1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 750, 330));
+        personTxt1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 610, 120, 40));
 
         quantitySpinner.setValue(1);
         quantitySpinner.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -539,13 +393,54 @@ public class DashBoard extends javax.swing.JFrame {
                 quantitySpinnerKeyTyped(evt);
             }
         });
-        personTxt1.add(quantitySpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 100, 30));
+        personTxt1.add(quantitySpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 100, 30));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 0, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Quantity");
-        personTxt1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 80, 30));
+        personTxt1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 80, 30));
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Equipments");
+        personTxt1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 100, 30));
+
+        nameTxt.setBackground(new java.awt.Color(255, 255, 255));
+        nameTxt.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        nameTxt.setEnabled(false);
+        personTxt1.add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 140, -1));
+
+        jLabel14.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel14.setText("Name");
+        personTxt1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 87, 25));
+
+        SurnameTxt.setBackground(new java.awt.Color(255, 255, 255));
+        SurnameTxt.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        SurnameTxt.setEnabled(false);
+        personTxt1.add(SurnameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 140, -1));
+
+        contactTxt.setBackground(new java.awt.Color(255, 255, 255));
+        contactTxt.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        contactTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contactTxtActionPerformed(evt);
+            }
+        });
+        contactTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                contactTxtKeyTyped(evt);
+            }
+        });
+        personTxt1.add(contactTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 250, 140, -1));
+
+        dateTxt.setBackground(new java.awt.Color(255, 255, 255));
+        dateTxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        dateTxt.setForeground(new java.awt.Color(0, 0, 0));
+        dateTxt.setDateFormatString("y -MMM-d");
+        personTxt1.add(dateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 150, 20));
 
         personTxt.add(personTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 700));
 
@@ -580,9 +475,10 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel8.add(jPanel13);
         jPanel13.setBounds(210, 60, 370, 60);
 
-        userReservationTable.setBackground(new java.awt.Color(255, 255, 255));
-        userReservationTable.setForeground(new java.awt.Color(0, 0, 0));
-        userReservationTable.setModel(new javax.swing.table.DefaultTableModel(
+        userReservationTable1.setBackground(new java.awt.Color(255, 255, 255));
+        userReservationTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        userReservationTable1.setForeground(new java.awt.Color(0, 0, 0));
+        userReservationTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -598,32 +494,16 @@ public class DashBoard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(userReservationTable);
+        userReservationTable1.setRowHeight(30);
+        jScrollPane4.setViewportView(userReservationTable1);
 
         jPanel8.add(jScrollPane4);
         jScrollPane4.setBounds(60, 240, 670, 403);
 
-        jButton3.setBackground(new java.awt.Color(102, 0, 0));
-        jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(204, 153, 0));
-        jButton3.setText("Show table");
-        jButton3.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jButton3FocusGained(evt);
-            }
-        });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel8.add(jButton3);
-        jButton3.setBounds(340, 190, 130, 29);
-
         TabPanel.addTab("tab2", jPanel8);
 
         getContentPane().add(TabPanel);
-        TabPanel.setBounds(190, 40, 980, 820);
+        TabPanel.setBounds(180, 40, 980, 830);
 
         jPanel3.setBackground(new java.awt.Color(102, 0, 0));
         jPanel3.setLayout(null);
@@ -685,45 +565,51 @@ public class DashBoard extends javax.swing.JFrame {
         getContentPane().add(jPanel3);
         jPanel3.setBounds(0, 60, 190, 800);
 
-        pack();
+        setSize(new java.awt.Dimension(982, 790));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void reservatiobBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservatiobBtnActionPerformed
-        // TODO add your handling code here:
-        TabPanel.setSelectedIndex(0);
-    }//GEN-LAST:event_reservatiobBtnActionPerformed
-
-    private void showReservationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showReservationBtnActionPerformed
-        // TODO add your handling code here:
-        TabPanel.setSelectedIndex(1);
-    }//GEN-LAST:event_showReservationBtnActionPerformed
-
-    private void reservatiobBtnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_reservatiobBtnFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reservatiobBtnFocusGained
 
     private void logOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutBtnActionPerformed
         // TODO add your handling code here:
         dispose();
+        Portal p = new Portal();
+        p.setVisible(true);
     }//GEN-LAST:event_logOutBtnActionPerformed
+
+    private void quantitySpinnerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quantitySpinnerKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_quantitySpinnerKeyTyped
+
+    private void quantitySpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_quantitySpinnerStateChanged
+        // TODO add your handling code here:
+        int var1 = Integer.parseInt(quantitySpinner.getValue().toString());
+        if(var1 < 1){
+            quantitySpinner.setValue(1);
+        }
+    }//GEN-LAST:event_quantitySpinnerStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
-//            nameTxt.setText(UserFirstName);
-//            SurnameTxt.setText(UserLastName);
+            //            nameTxt.setText(UserFirstName);
+            //            SurnameTxt.setText(UserLastName);
             String name = nameTxt.getText().toLowerCase();
             String surname = SurnameTxt.getText().toLowerCase();
             String contacts = contactTxt.getText().toLowerCase();
             String equipments = (String) cbxEquipment.getSelectedItem();
             java.util.Date return_date = dateTxt.getDate();
             java.sql.Date sqlDate = new java.sql.Date(return_date.getTime());
-           
+
             int quantity= (int) quantitySpinner.getValue();
             
-             boolean isValid = UserHandler.reservationValid(name,surname, contacts, sqlDate,equipments,quantity);
+            // contact number validator
+             Boolean contactValidator =isValidNumber(contacts);
             
+            boolean isValid = UserHandler.reservationValid(name,surname, contacts, sqlDate,equipments,quantity);
+
             if(isValid){
                 JOptionPane.showMessageDialog(null, "reservation already exists.");
                 return;
@@ -736,98 +622,101 @@ public class DashBoard extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please Select an Item");
                 return;
             }
-            else{
-            UserHandler.reservation(name,surname,contacts, sqlDate ,equipments,quantity);
-            JOptionPane.showMessageDialog(null, "Reservation created");
+            if (!name.matches("^[a-zA-Z\\s]+$")) {
+                JOptionPane.showMessageDialog(null, "First name Must Not Have A Number Or Special Characters");
+                return;
             }
-        
-//            nameTxt.setText("");
-//            SurnameTxt.setText("");
+            if (!surname.matches("^[a-zA-Z\\s]+$")) {
+                JOptionPane.showMessageDialog(null, "Last name Must Not Have A Number Or Special Characters");
+                return;
+            }
+            if(contactTxt.equals(" ")){
+                JOptionPane.showMessageDialog(null, "Contact is empty");
+                return;
+            }
+            if(contactValidator){
+                JOptionPane.showMessageDialog(null, "Contact Starts with 09");
+                return;
+            }
+             if(contacts.length()!= 11){
+                 JOptionPane.showMessageDialog(null, "Contact must be 11 digits");
+                 return;
+            }
+            else{
+                UserHandler.reservation(name,surname,contacts, sqlDate ,equipments,quantity);
+                JOptionPane.showMessageDialog(null, "Reservation created");
+            }
+
+            //            nameTxt.setText("");
+            //            SurnameTxt.setText("");
             contactTxt.setText("");
             dateTxt.setCalendar(null);
             quantitySpinner.setValue(1);
             cbxEquipment.setSelectedItem("Select Item");
-            
+
         } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Complete your input");
+            JOptionPane.showMessageDialog(null, "Date is empty");
         }
-        
-        
-        
-        // clear the table before add 
-          DefaultTableModel model = (DefaultTableModel) reservationTable.getModel();
-           model.setRowCount(0);
-                   
-        // to update the table
+
+        // clear the table before add
+        DefaultTableModel model = (DefaultTableModel) userReservationTable1.getModel();
+        model.setRowCount(0);
+
+        // to add data to table
         try (Connection conn = DatabaseConnector.getConnection()) {
-            String query = "SELECT * FROM reservation";
-            PreparedStatement pstmt = conn.prepareStatement(query);              
+            String query = "SELECT * FROM reservation where name= ? AND surname= ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, UserFirstName);
+            pstmt.setString(2, UserLastName);
             ResultSet rs = pstmt.executeQuery();
-              
 
             while (rs.next()) {
                 // User exists with the provided username and password
-                 String id = String.valueOf(rs.getInt("reservation_id"));
+                String id = String.valueOf(rs.getInt("reservation_id"));
                 String name = rs.getString("name");
                 String surname = rs.getString("surname");
                 long contact = rs.getLong("contacts");
                 String contacts = String.valueOf(contact);
-                String date = String.valueOf(rs.getDate("return_date"));
+                String dates = String.valueOf(rs.getDate("return_date"));
                 String equipment = rs.getString("equipment");
                 String quantity = String.valueOf(rs.getInt("quantity"));
-                
+
                 //String array for store data into jtable
-                String tbData[] = {id,name,surname,contacts,date,equipment,quantity};
-                
-                DefaultTableModel tblModel = (DefaultTableModel) reservationTable.getModel();
-                
+                String tbData[] = {id,name,surname,contacts,dates,equipment,quantity};
+
+                DefaultTableModel tblModel = (DefaultTableModel) userReservationTable1.getModel();
+
                 //add Strinf array dara into table
                 tblModel.addRow(tbData);
-                
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-        
-        
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton1FocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1FocusGained
 
-    private void jButton2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2FocusGained
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        contactTxt.setText("");
-            dateTxt.setCalendar(null);
-            quantitySpinner.setValue(1);
-            cbxEquipment.setSelectedItem("Select Item");
-        
-       
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void cbxEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEquipmentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxEquipmentActionPerformed
 
-    private void quantitySpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_quantitySpinnerStateChanged
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int var1 = Integer.parseInt(quantitySpinner.getValue().toString());
-        if(var1 < 1){
-            quantitySpinner.setValue(1);
-        }
-    }//GEN-LAST:event_quantitySpinnerStateChanged
+        contactTxt.setText("");
+        dateTxt.setCalendar(null);
+        quantitySpinner.setValue(1);
+        cbxEquipment.setSelectedItem("Select Item");
 
-    private void contactTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactTxtActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton2FocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_contactTxtActionPerformed
+    }//GEN-LAST:event_jButton2FocusGained
 
     private void contactTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactTxtKeyTyped
         // TODO add your handling code here:
@@ -836,58 +725,23 @@ public class DashBoard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_contactTxtKeyTyped
 
-    private void jButton3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jButton3FocusGained
+    private void contactTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3FocusGained
+    }//GEN-LAST:event_contactTxtActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void reservatiobBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservatiobBtnActionPerformed
         // TODO add your handling code here:
-        
-         // clear the table before add 
-           DefaultTableModel model = (DefaultTableModel) userReservationTable.getModel();
-           model.setRowCount(0);
-        
-        // to add data to table
-       try (Connection conn = DatabaseConnector.getConnection()) {
-            String query = "SELECT * FROM reservation where name= ? AND surname= ?";
-            
-            PreparedStatement pstmt = conn.prepareStatement(query);              
-            pstmt.setString(1, UserFirstName);
-            pstmt.setString(2, UserLastName);
-            ResultSet rs = pstmt.executeQuery();
-              
+        TabPanel.setSelectedIndex(0);
+    }//GEN-LAST:event_reservatiobBtnActionPerformed
 
-            while (rs.next()) {
-                // User exists with the provided username and password
-                 String id = String.valueOf(rs.getInt("reservation_id"));
-                String name = rs.getString("name");
-                String surname = rs.getString("surname");
-                long contact = rs.getLong("contacts");
-                String contacts = String.valueOf(contact);
-                String dates = String.valueOf(rs.getDate("return_date"));
-                String equipment = rs.getString("equipment");
-                String quantity = String.valueOf(rs.getInt("quantity"));
-                
-                //String array for store data into jtable
-                String tbData[] = {id,name,surname,contacts,dates,equipment,quantity};
-                
-                DefaultTableModel tblModel = (DefaultTableModel) userReservationTable.getModel();
-                
-                //add Strinf array dara into table
-                tblModel.addRow(tbData);
-                
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void quantitySpinnerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quantitySpinnerKeyTyped
+    private void reservatiobBtnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_reservatiobBtnFocusGained
         // TODO add your handling code here:
-        if (!Character.isDigit(evt.getKeyChar())){
-            evt.consume();
-        }
-    }//GEN-LAST:event_quantitySpinnerKeyTyped
+    }//GEN-LAST:event_reservatiobBtnFocusGained
+
+    private void showReservationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showReservationBtnActionPerformed
+        // TODO add your handling code here:
+        TabPanel.setSelectedIndex(1);
+    }//GEN-LAST:event_showReservationBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -927,30 +781,21 @@ public class DashBoard extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField SurnameTxt;
-    private javax.swing.JTextField SurnameTxt1;
     private javax.swing.JTabbedPane TabPanel;
     private javax.swing.JComboBox<String> cbxEquipment;
     private javax.swing.JTextField contactTxt;
-    private javax.swing.JTextField contactTxt1;
     private com.toedter.calendar.JDateChooser dateTxt;
-    private com.toedter.calendar.JDateChooser dateTxt1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -961,25 +806,55 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JButton logOutBtn;
     private javax.swing.JTextField nameTxt;
-    private javax.swing.JTextField nameTxt2;
     private javax.swing.JPanel personTxt;
     private javax.swing.JPanel personTxt1;
     private javax.swing.JSpinner quantitySpinner;
     private javax.swing.JButton reservatiobBtn;
-    private javax.swing.JTable reservationTable;
     private javax.swing.JButton showReservationBtn;
     private javax.swing.JLabel userName;
-    private javax.swing.JTable userReservationTable;
+    private javax.swing.JTable userReservationTable1;
     // End of variables declaration//GEN-END:variables
+
+//    public static boolean isValidNumber(String number) {
+//        // Define the regular expression pattern
+//        String pattern = "^09\\d{9}$";
+//
+//        // Compile the pattern into a regex object
+//        Pattern regex = Pattern.compile(pattern);
+//
+//        // Match the input number against the pattern
+//        Matcher matcher = regex.matcher(number);
+//
+//        // Check if the number matches the pattern
+//        return matcher.matches();
+//    }
+     public static boolean isValidNumber(String number) {
+        if (number.length() == 2) {
+            return false;
+        }
+
+        char digitAtIndex0 = number.charAt(0);
+        char digitAtIndex1 = number.charAt(1);
+
+        return digitAtIndex0 != '0' && digitAtIndex1 != '9';
+    }
+//     public static boolean checkInputAtIndexNuber(String number) {
+//        if (number.length() == 2) {
+//            return false;
+//        }
+//
+//        char digitAtIndex0 = number.charAt(0);
+//        char digitAtIndex1 = number.charAt(1);
+//
+//        return digitAtIndex0 != '0' && digitAtIndex1 != '9';
+//    }
 }

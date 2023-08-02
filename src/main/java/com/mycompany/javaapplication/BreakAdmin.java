@@ -11,13 +11,13 @@ import javax.swing.SwingUtilities;
  *
  * @author loena
  */
-public class Break extends javax.swing.JFrame {
+public class BreakAdmin extends javax.swing.JFrame {
 int countdown = 10;
     /**
      * Creates new form loading
      */
     
-    public Break() {
+    public BreakAdmin() {
         initComponents();
         
         
@@ -33,7 +33,7 @@ Thread countdownThread = new Thread(() -> {
                                     if(countdown==0){
                                        dispose();
                                        
-                                       Login b = new Login();
+                                       LoginAdmin b = new LoginAdmin();
                                        b.setVisible(true);
                                     }
                                 }
@@ -156,14 +156,18 @@ Thread countdownThread = new Thread(() -> {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Break.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BreakAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Break.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BreakAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Break.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BreakAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Break.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BreakAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -172,7 +176,7 @@ Thread countdownThread = new Thread(() -> {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Break().setVisible(true);
+                new BreakAdmin().setVisible(true);
             }
         });
     }

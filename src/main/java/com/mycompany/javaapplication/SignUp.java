@@ -331,21 +331,29 @@ public class SignUp extends javax.swing.JFrame {
         // Condition when the user click the submit without providing an input
         if (fname.equals("") || uname.equals("") || username.equals("") || password.equals("") || confirmPass.equals("")){
             JOptionPane.showMessageDialog(null, "Please provide an input.");
+            return;
         }
-        else{
-            if((username.contains("..")) || (password.contains(".."))){
+         if((username.contains("..")) || (password.contains(".."))){
                 JOptionPane.showMessageDialog(null, "Input not acceptable.");
+                return;
             }
-            else{
             if((username.contains(" ")) || (password.contains(" "))){
                 JOptionPane.showMessageDialog(null, "Invalid Sign up. Username, Password can't contains white space");
-            }else{
-                if(password.length() < 8){
+                return;
+            }
+            if(password.length() < 8 || username.length() < 8){
                     
-                    JOptionPane.showMessageDialog(null, "Password must be atleast 8 character");
-                }else{
-                    
-                
+                    JOptionPane.showMessageDialog(null, "Username and Password must be atleast 8 character");
+                    return;
+                }
+            if (!fname.matches("^[a-zA-Z\\s]+$")) {
+                JOptionPane.showMessageDialog(null, "Firstname Must Not Have A Number Or Special Characters");
+                return;
+            }
+            if (!uname.matches("^[a-zA-Z\\s]+$")) {
+                JOptionPane.showMessageDialog(null, "Lastname Must Not Have A Number Or Special Characters");
+                return;
+            }
             if (password.equals(confirmPass)) {
             boolean isExist = UserHandler.registerUser(fname,uname, username, password, role);
 
@@ -364,11 +372,7 @@ public class SignUp extends javax.swing.JFrame {
                 jframe.pack();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Password incorrect.");
-        }
-            }
-            }
-        }
+            JOptionPane.showMessageDialog(null, "Invalid input: Password.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -394,16 +398,12 @@ public class SignUp extends javax.swing.JFrame {
 
     private void txtFullnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFullnameKeyTyped
         // TODO add your handling code here:
-         if (!Character.isAlphabetic(evt.getKeyChar())){
-            evt.consume();
-        }
+        //if(txtFullname.contains("")){
+       // }
     }//GEN-LAST:event_txtFullnameKeyTyped
 
     private void txtSurnameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSurnameKeyTyped
         // TODO add your handling code here:
-         if (!Character.isAlphabetic(evt.getKeyChar())){
-            evt.consume();
-        }
     }//GEN-LAST:event_txtSurnameKeyTyped
 
     private void txtUsernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyTyped
